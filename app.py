@@ -36,9 +36,9 @@ import pandas as pd
 # STOCK_DATA.to_csv("mystocks.csv", index=False)
 
 ############## LOADING
-STOCKS = pd.read_csv("sp500_list.csv")
+STOCKS = pd.read_csv("https://raw.githubusercontent.com/ldavidr3/sp500_dashboard/main/sp500_list.csv")
 
-STOCK_DATA = pd.read_csv("mystocks.csv")
+STOCK_DATA = pd.read_csv("https://raw.githubusercontent.com/ldavidr3/sp500_dashboard/main/mystocks.csv")
 
 STOCK_DATA.rename(columns = {'variable_0':'Stock'}, inplace = True)
 
