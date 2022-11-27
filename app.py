@@ -44,21 +44,21 @@ STOCK_DATA.rename(columns = {'variable_0':'Stock'}, inplace = True)
 
 app = Dash(__name__, 
                 external_stylesheets=[dbc.themes.JOURNAL],
-                title='S&P Index',
+                title='S&P 500',
                 meta_tags=[{'name': 'viewport',
                             'content': 'width=device-width, initial-scale=1.0'}]
             )
 
 # Layout:
 # ************************************************************************
-alert = dbc.Alert("Please select a sector to avoid further", 
+alert = dbc.Alert("Por favor, escoja un Sector para ver los resultados", 
                 color="danger",
                 dismissable=True, 
                 style={'fontSize':15})  # use dismissable or duration=5000 for alert to close in x milliseconds
                 
 app.layout = dbc.Container([
     dbc.Row(
-        dbc.Col(html.H1("S&P Index Dashboard", className='text-center text-primary mb-4'),
+        dbc.Col(html.H1("S&P 500 Dashboard", className='text-center text-primary mb-4'),
                 width=12),
         style={"margin-top": "1rem",}
     ),
@@ -68,15 +68,15 @@ app.layout = dbc.Container([
                 [
                     dbc.CardBody(
                         [
-                            html.H2("Stocks by Sector", className="card-title text-center text-primary"),
-                            dbc.CardImg(src="/assets/icon.png", title="S&P Index Stocks", className="h-50 w-50 mx-5 d-inline-block"),
-                            html.H6("Choose a sector to get sample stocks: \n", className="card-text my-3"),
+                            html.H2("Acciones por Sector", className="card-title text-center text-primary"),
+                            dbc.CardImg(src="/assets/icon.png", title="Acciones S&P 500", className="h-50 w-50 mx-5 d-inline-block"),
+                            html.H6("Escoge un sector para tener una muestra de las acciones: \n", className="card-text my-3"),
                             html.Div(id="the_alert"),
                             dcc.Dropdown(id='my-dpdn', multi=False, value='Consumer Discretionary', style={"color": "#000000"},
                                 options=[{'label':x, 'value':x}
                                         for x in sorted(STOCKS['GICS Sector'].unique())],
                                 ),
-                            html.H6("Checkout any Stocks: \n", className="card-text my-3" ),
+                            html.H6("Acciones disponibles: \n", className="card-text my-3" ),
                             dcc.Dropdown(id='my-dpdn2', multi=True, value=['ABC'],
                                     options=[{'label':x, 'value':x}
                                     for x in sorted(STOCK_DATA['Stock'].unique())],
@@ -92,7 +92,7 @@ app.layout = dbc.Container([
             dbc.Card(
                 [   
                     dbc.CardBody(
-                        html.H2("Sector Resume", className="card-text text-info")
+                        html.H2("Resumen del Sector", className="card-text text-info")
                     ),
                     dcc.Markdown(children='', id='text-desc', className='text-center lead row align-items-center'),                 
                 ],
@@ -103,7 +103,7 @@ app.layout = dbc.Container([
             dbc.Card(
                 [
                     dbc.CardBody(
-                        html.H2("Sectors ordered ", className="card-text text-info")
+                        html.H2("Companias Acumuladas por Sector", className="card-text text-info")
                     ),
                     dcc.Graph(id='my-hist', figure={}, style={'width': '100%', 'height': '65%'}),                    
                 ],   
@@ -116,7 +116,7 @@ app.layout = dbc.Container([
             dbc.Card(
                 [
                     dbc.CardBody(
-                        html.H2("Stock Closing Price", className="card-text text-info")
+                        html.H2("Precio de Cierre de la Accion", className="card-text text-info")
                     ),
                     dcc.Graph(id='line-fig2', figure={}, style={'width': '100%', 'height': '65%'}),
                 ],                
@@ -127,7 +127,7 @@ app.layout = dbc.Container([
             dbc.Card(
                 [
                     dbc.CardBody(
-                        html.H2("Sector Leaders by Trade Volume", className="card-text text-info")
+                        html.H2("Lideres de Sector por Volumen de Transacciones", className="card-text text-info")
                     ),
                     dcc.Graph(id='box-fig', figure={}),                    
                 ],                
@@ -138,7 +138,7 @@ app.layout = dbc.Container([
             dbc.Card(
                 [
                     dbc.CardBody(
-                        html.H4("Eevee is happy to see you!", className="card-text text-success")
+                        html.H4("Eevee esta feliz de verte!", className="card-text text-success")
                     ),
                     dbc.CardImg(src="/assets/eevee_running.gif", bottom=True, class_name='w-75 mx-auto d-inline-block'),
                 ],
@@ -149,7 +149,7 @@ app.layout = dbc.Container([
     dbc.Row(
         dbc.Col([
                 html.Footer([
-                            "made with infinite ♡ by ", 
+                            "hecho con ♡ infinito, ", 
                             html.A("212ldavidr", href='https://instagram.com/212ldavidr', target="_blank")],
                         className='text-center text-danger'),
                 ], width=12),
