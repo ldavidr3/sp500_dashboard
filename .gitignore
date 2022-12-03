@@ -1,3 +1,4 @@
 .vscode/
 dash_env/
 *.pyc
+.DS_Store

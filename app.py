@@ -48,6 +48,7 @@ app = Dash(__name__,
                 meta_tags=[{'name': 'viewport',
                             'content': 'width=device-width, initial-scale=1.0'}]
             )
+server = app.server
 
 # Layout:
 # ************************************************************************
@@ -103,7 +104,7 @@ app.layout = dbc.Container([
             dbc.Card(
                 [
                     dbc.CardBody(
-                        html.H2("Companias Acumuladas por Sector", className="card-text text-info")
+                        html.H2("Compañías Acumuladas por Sector", className="card-text text-info")
                     ),
                     dcc.Graph(id='my-hist', figure={}, style={'width': '100%', 'height': '65%'}),                    
                 ],   
@@ -116,7 +117,7 @@ app.layout = dbc.Container([
             dbc.Card(
                 [
                     dbc.CardBody(
-                        html.H2("Precio de Cierre de la Accion", className="card-text text-info")
+                        html.H2("Precio de Cierre de la Acción", className="card-text text-info")
                     ),
                     dcc.Graph(id='line-fig2', figure={}, style={'width': '100%', 'height': '65%'}),
                 ],                
@@ -127,7 +128,7 @@ app.layout = dbc.Container([
             dbc.Card(
                 [
                     dbc.CardBody(
-                        html.H2("Lideres de Sector por Volumen de Transacciones", className="card-text text-info")
+                        html.H2("Líderes de Sector por Volumen de Transacciones", className="card-text text-info")
                     ),
                     dcc.Graph(id='box-fig', figure={}),                    
                 ],                
@@ -138,7 +139,7 @@ app.layout = dbc.Container([
             dbc.Card(
                 [
                     dbc.CardBody(
-                        html.H4("Eevee esta feliz de verte!", className="card-text text-success")
+                        html.H4("Eevee está feliz de verte!", className="card-text text-success")
                     ),
                     dbc.CardImg(src="/assets/eevee_running.gif", bottom=True, class_name='w-75 mx-auto d-inline-block'),
                 ],
@@ -208,7 +209,7 @@ def update_graph(stock_slctd):
                     font=dict(
                             size=14),   
                     )
-    fighist.add_annotation(text="Chosen sector!", 
+    fighist.add_annotation(text="Sector elegido!", 
                             x=stock_slctd, 
                             y=STOCKS.groupby('GICS Sector')['Symbol'].nunique().loc[stock_slctd],
                             arrowhead=1, showarrow=True)
@@ -267,13 +268,13 @@ def update_markdown(sec_chosen):
         df_m = STOCKS
         df_m = df_m.groupby('GICS Sector')['Symbol'].nunique()
         df_m = df_m.loc[sec_chosen]
-        text = " There are **{} companies** in the {} sector.  \n".format(df_m, sec_chosen)
+        text = " Hay **{} compañías** en el sector *{}* .  \n".format(df_m, sec_chosen)
         
         #### Average closing price
 
         sym = list(STOCKS[STOCKS['GICS Sector'] == sec_chosen].Symbol)
         aux = STOCK_DATA[STOCK_DATA['Stock'].isin(sym)]
-        text += " In average, the sector' stock prices ** close in  ${0:,.2f}. ** ".format(aux['Close'].mean())
+        text += " En promedio, las acciones del sector ** cierran en  ${0:,.2f}. ** ".format(aux['Close'].mean())
         return text, ""
 
 
